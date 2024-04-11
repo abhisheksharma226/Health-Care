@@ -1,5 +1,6 @@
 const express = require("express");
 const path = require("path");
+const mongoose = require("mongoose");
 
 const app = express();
 const PORT = 3000;
@@ -7,6 +8,8 @@ const PORT = 3000;
 const patientRoute = require("./routes/patient");
 const doctorRoute = require("./routes/doctor");
 
+//DataBase Connection
+mongoose.connect('mongodb://127.0.0.1:27017/HealthCare').then((e) => console.log("MongoDB Connected"))
 
 //for Css
 app.use(express.static(path.join(__dirname, "public")));
@@ -15,6 +18,9 @@ app.use(express.static(path.join(__dirname, "public")));
 app.set("view engine" , "ejs");
 app.set("views" , path.resolve("./views"));
 
+
+//MiddleWares
+app.use(express.urlencoded({ extended: false }));
 
 app.get("/" , (req , res) => {
     res.render("home");

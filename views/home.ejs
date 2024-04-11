@@ -7,7 +7,7 @@
       href="https://cdn.jsdelivr.net/npm/remixicon@3.4.0/fonts/remixicon.css"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="/styles.css" />
+    <link rel="stylesheet" href="/home.css" />
     <title>HealthCare | Services</title>
   </head>
   <body>
@@ -21,9 +21,24 @@
           <li class="link"><a href="#">Pages</a></li>
           <li class="link"><a href="#">Blog</a></li>
         </ul>
-        <button class="btn"> <a href="login.ejs">Login</a></button>
-        <button class="btn">Signup</button>
+
+
+        <div class="buttons">
+
+          <div class="login-dropdown">
+            <button class="login-btn">Login</button>
+            <div class="dropdown-content">
+              <a href="/patient/login">Patient</a>
+              <a href="/doctor/login">Doctor</a>
+            </div>
+          </div>
+          
+          <button class="btn"> <a href="patient/signup">Signup</a></button>
+        </div>
+
       </nav>
+
+
       <div class="section__container header__container">
         <div class="header__content">
           <h1>Providing an Exceptional Patient Experience</h1>
