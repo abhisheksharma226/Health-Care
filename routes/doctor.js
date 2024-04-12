@@ -32,6 +32,7 @@ router.post("/login" , async(req , res) => {
 
 router.post("/signup" , async(req , res) => {
     const { drname , dremail , drpassword } = req.body;
+    
     await Doctor.create({
         drname , 
         dremail , 

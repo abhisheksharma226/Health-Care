@@ -8,6 +8,7 @@ const PORT = 3000;
 const patientRoute = require("./routes/patient");
 const doctorRoute = require("./routes/doctor");
 
+
 //DataBase Connection
 mongoose.connect('mongodb://127.0.0.1:27017/HealthCare').then((e) => console.log("MongoDB Connected"))
 
@@ -29,6 +30,7 @@ app.get("/" , (req , res) => {
 
 app.use("/patient" , patientRoute);
 app.use("/doctor" , doctorRoute);
+
 
 
 

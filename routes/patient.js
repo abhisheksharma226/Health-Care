@@ -1,5 +1,6 @@
 const { Router } = require("express");
 const patient = require("../models/patient");
+const patientData = require("../models/patientData");
 
 const router = Router();
 
@@ -9,6 +10,10 @@ router.get("/login" , (req , res) => {
 
 router.get("/signup" , (req , res) => {
     return res.render("signup");
+})
+
+router.get("/patientCollection" , (req , res) => {
+    return res.render("patientCollection");
 })
 
 router.get("/patientHome" , (req , res) => {
@@ -36,7 +41,40 @@ router.post("/signup" , async(req , res) => {
         email , 
         password, 
     })
-    return res.redirect("patientHome");
+    return res.redirect("patientCollection");
 })
+
+
+router.post("/patientCollection", async (req, res) => {
+    try {
+        const { fullName, dob, email, mobile, gender, occupation, walkingData, heartRate, respiratoryRate, bloodPressure, calories, sleepQuality, temperature,  ecgInformation } = req.body;
+
+        // Create a new instance of Patient model with both registration and patientData form data
+        const newPatient = new patientData({
+            fullName,
+            dob,
+            email,
+            mobile,
+            gender,
+            occupation,
+            walkingData,
+            heartRate,
+            respiratoryRate,
+            bloodPressure,
+            calories,
+            sleepQuality,
+            temperature,
+            ecgInformation,
+        });
+
+        await newPatient.validate();
+        await newPatient.save();
+
+        return res.redirect("patientHome");
+    } catch (error) {
+        console.error("Error creating patient:", error);
+        return res.status(500).json({ error: "Error creating patient. Please try again." });
+    }
+});
 
 module.exports = router;

@@ -10,7 +10,7 @@ const doctorSchema = new Schema({
     dremail : {
         type : String , 
         required : true,
-        unique : true ,
+        unique : true,
     } ,
     salt : {
         type : String ,
@@ -30,12 +30,12 @@ doctorSchema.pre("save" , function(next) {
     return;
 
     const salt = randomBytes(16).toString();
-    const hashedPassword = createHmac("sha256" , salt)
+    const hasheddrPassword = createHmac("sha256" , salt)
     .update(doctor.drpassword)
     .digest("hex");
 
     this.salt = salt;
-    this.drpassword = hashedPassword;
+    this.drpassword = hasheddrPassword;
 
     next();
 

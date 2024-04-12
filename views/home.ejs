@@ -16,10 +16,10 @@
         <div class="nav__logo">Health<span>Care</span></div>
         <ul class="nav__links">
           <li class="link"><a href="#">Home</a></li>
-          <li class="link"><a href="#">About Us</a></li>
-          <li class="link"><a href="#">Services</a></li>
-          <li class="link"><a href="#">Pages</a></li>
-          <li class="link"><a href="#">Blog</a></li>
+          <li class="link"><a href="#about">About Us</a></li>
+          <li class="link"><a href="#services">Services</a></li>
+          <li class="link"><a href="#specialist">Specialist</a></li>
+          <li class="link"><a href="https://health.odisha.gov.in/healthostf/list-empanelled-private-hospitals" target="_blank">Blog</a></li>
         </ul>
 
 
@@ -56,22 +56,28 @@
             patient-centered approach, we're dedicated to your well-being. Trust
             us with your health and experience the difference.
           </p>
-          <button class="btn">See Services</button>
+          <button class="btn"> <a href="#services" style="color: white;">See Services</a></button>
         </div>
+
+
+
         <div class="header__form">
           <form>
             <h4>Book Now</h4>
-            <input type="text" placeholder="First Name" />
-            <input type="text" placeholder="Last Name" />
+            <input type="name" placeholder="First Name" />
+            <input type="name" placeholder="Last Name" />
             <input type="text" placeholder="Address" />
-            <input type="text" placeholder="Phone No." />
-            <button class="btn form__btn">Book Appointment</button>
+            <input type="number" placeholder="Phone No." />
+            <button class="btn form__btn"> <a href="/patient/signup" style="color: white;">Book Appointment</a></button>
           </form>
         </div>
+
+
+
       </div>
     </header>
 
-    <section class="section__container service__container">
+    <section class="section__container service__container" id="services">
       <div class="service__header">
         <div class="service__header__content">
           <h2 class="section__header">Our Special service</h2>
@@ -80,7 +86,7 @@
             delivering unparalleled service tailored to your unique needs.
           </p>
         </div>
-        <button class="service__btn">Ask A Service</button>
+        
       </div>
       <div class="service__grid">
         <div class="service__card">
@@ -112,7 +118,7 @@
         </div>
       </div>
     </section>
-    <section class="section__container about__container">
+    <section class="section__container about__container" id="about">
       <div class="about__content">
         <h2 class="section__header">About Us</h2>
         <p>
@@ -180,7 +186,7 @@
       </div>
     </section>
 
-    <section class="section__container doctors__container">
+    <section class="section__container doctors__container" id="specialist">
       <div class="doctors__header">
         <div class="doctors__header__content">
           <h2 class="section__header">Our Special Doctors</h2>

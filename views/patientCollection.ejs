@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Form</title>
+    <link rel="stylesheet" href="/patientCollections.css">
+</head>
+
+<body>
+    <div class="container">
+      
+        <form id="registration-form" action="/patient/patientCollection" method="post">
+            <h1>Registration Form</h1>
+            <div class="form-row">
+
+                <div class="container2">
+
+                    <div class="inc">
+                        <label for="full-name">Full Name:</label>
+                        <input type="text" id="fullName" name="fullName" required placeholder="Full Name">
+                    </div>
+
+                    <div class="inc">
+                        <label for="dob">Date of Birth:</label>
+                        <input type="date" id="dob" name="dob" required>
+                    </div>
+
+                    <div class="inc">
+                        <label for="email">Email:</label>
+                        <input type="email" id="email" name="email" required placeholder="Email">
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="form-row">
+                <div class="container2">
+
+                    <div class="inc">
+                        <label for="mobile">Mobile Number:</label>
+                        <input type="tel" id="mobile" name="mobile" placeholder="Mobile Number">
+                    </div>
+
+                    <div class="inc">
+                        <label for="gender">Gender:</label>
+                        <select name="gender" id="gender">
+                            <option value="">Select</option>
+                            <option value="male">Male</option>
+                            <option value="female">Female</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+
+                    <div class="inc">
+                        <label for="occupation">Occupation:</label>
+                        <input type="text" id="occupation" name="occupation" placeholder="Occupation">
+                    </div>
+
+                </div>
+
+            </div>
+
+            <h3>Medical Details</h3>
+
+            <div class="form-row">
+                <div class="container2">
+
+                    <div class="inc">
+                        <label for="Steps Count">Walking Data:</label>
+                        <input type="number" id="walkingData" name="walkingData" placeholder="Steps Count">
+                    </div>
+
+                    <div class="inc">
+                        <label for="heart-rate">Heart Rate:</label>
+                        <input type="number" id="heartRate" name="heartRate" placeholder="Heart Rate">
+                    </div>
+
+                    <div class="inc">
+                        <label for="respiratory-rate">Respiratory Rate:</label>
+                        <input type="number" id="respiratoryRate" name="respiratoryRate" placeholder="Respiratory Rate">
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="form-row">
+                <div class="container2">
+
+                    <div class="inc">
+                        <label for="blood-pressure">Blood Pressure:</label>
+                        <input type="text" id="bloodPressure" name="bloodPressure" placeholder="Blood Pressure">
+                    </div>
+
+                    <div class="inc">
+                        <label for="calories">Calories:</label>
+                        <input type="number" id="calories" name="calories" placeholder="Calories">
+                    </div>
+
+                    <div class="inc">
+                        <label for="sleep-quality">Sleep Quality:</label>
+                        <input type="text" id="sleepQuality" name="sleepQuality" placeholder="Sleep Quality">
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="form-row">
+                <div class="container2">
+
+                    <div class="inc">
+                        <label for="temperature">Temperature:</label>
+                        <input type="number" id="temperature" name="temperature" placeholder="Temperature">
+                    </div>
+
+                    <!-- <div class="inc">
+                        <label for="early-diagnostics" id="edr">Early Diagnostic Reports:</label>
+                        <input type="file" id="earlyDiagnosticReports" name="earlyDiagnosticReports" multiple>
+                    </div> -->
+
+                    <div class="inc">
+                        <label for="ecg">ECG Information:</label>
+                        <input type="text" id="ecgInformation" name="ecgInformation" placeholder="ECG Information">
+                    </div>
+
+                </div>
+
+            </div>
+
+            <button type="submit">Register</button>
+    </div>
+
+
+    </form>
+    </div>
+
+</body>
+
+</html>
