@@ -14,7 +14,6 @@ const patientSchema = new Schema({
     } ,
     salt : {
         type : String ,
-
     } ,
     password : {
         type : String , 
