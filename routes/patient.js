@@ -20,6 +20,13 @@ router.get("/patientHome" , (req , res) => {
     return res.render("patientHome");
 })
 
+router.get("/patientProfile" , (req , res) => {
+    return res.render("patientProfile")
+})
+
+
+
+
 router.post("/login" , async(req , res) => {
     const { email , password } = req.body;
 
@@ -34,14 +41,31 @@ router.post("/login" , async(req , res) => {
     }  
 })
 
+
 router.post("/signup" , async(req , res) => {
     const { name , email , password } = req.body;
-    await patient.create({
-        name , 
-        email , 
-        password, 
-    })
-    return res.redirect("patientCollection");
+
+    try {
+        const existingPatient = await patient.findOne({ email });
+        if (existingPatient) {
+            return res.render("signup", {
+                error: "Email Already Exist!"
+            });
+        }
+        await patient.create({
+            name , 
+            email , 
+            password, 
+        })
+        return res.redirect("patientCollection");
+
+    } catch (error) {
+        return res.render("signup" , {
+            error : "Email Already Exist!"
+        })
+    }
+
+    
 })
 
 
