@@ -1,6 +1,7 @@
 const { Router } = require("express");
 const patient = require("../models/patient");
 const patientData = require("../models/patientData");
+const PatientAppointment = require("../models/patientAppointment");
 
 const router = Router();
 
@@ -16,15 +17,50 @@ router.get("/patientCollection" , (req , res) => {
     return res.render("patientCollection");
 })
 
-router.get("/patientHome" , (req , res) => {
-    return res.render("patientHome");
-})
+
+router.get("/patientHome", async (req, res) => {
+    try {
+       
+        const loggedInPatient = await patient.findOne({});
+        
+        return res.render("patientHome", { patientName: loggedInPatient.name });
+    } catch (error) {
+        console.error("Error fetching patient name:", error);
+        return res.render("patientHome");
+    }
+});
+
 
 router.get("/patientProfile" , (req , res) => {
     return res.render("patientProfile")
 })
 
 
+router.get("/patientAppointments", async (req, res) => {
+    try {
+        const loggedInPatient = await patient.findOne({});
+        if (!loggedInPatient) {
+            console.error("No patient found");
+            return res.render("patientHome", { error: "No patient found" });
+        }
+        
+        // Corrected property name
+        const patientAppointments = loggedInPatient.patientAppointments || [];
+        
+        return res.render("patientAppointments", { patientName: loggedInPatient.name, patientAppointments });
+    } catch (error) {
+        console.error("Error fetching patient name:", error);
+        return res.render("patientHome", { error: "Error fetching patient name" });
+    }
+});
+
+
+
+
+router.get("/logout", (req, res) => {
+    res.clearCookie("token");
+    res.redirect("/"); 
+  });
 
 
 router.post("/login" , async(req , res) => {
@@ -32,8 +68,10 @@ router.post("/login" , async(req , res) => {
 
     try {
         const token = await patient.matchPasswordAndGenerateToken(email , password);
+        
+        const loggedInPatient = await patient.findOne({ email });
+        return res.cookie("token" , token).redirect("patientHome"); 
 
-    return res.cookie("token" , token).redirect("patientHome"); 
     } catch (error) {
         return res.render("login" , {
             error : "Incorrect Email or Password" ,
@@ -100,5 +138,33 @@ router.post("/patientCollection", async (req, res) => {
         return res.status(500).json({ error: "Error creating patient. Please try again." });
     }
 });
+
+
+router.post('/patientAppointments', async (req, res) => {
+    try {
+        const { name, number, email, date, time } = req.body;
+
+        const newAppointment = new PatientAppointment({
+            name,
+            number,
+            email,
+            date,
+            time
+        });
+
+       
+        await newAppointment.validate();
+        await newAppointment.save();
+
+       
+        return res.redirect("patientAppointments");
+    } catch (error) {
+        console.error('Error creating appointment:', error);
+        res.status(500).json({ error: 'An error occurred while creating the appointment' });
+    }
+});
+
+
+
 
 module.exports = router;

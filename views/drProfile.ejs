@@ -1,22 +1,18 @@
-
-<!--Website: wwww.codingdung.com-->
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Profile</title>
-    <link rel="stylesheet" href="/patientProfile.css">
-    <link rel="stylesheet" href="/patientCollections.css">
+    <title>My Profile</title>
+    <link rel="stylesheet" href="/drProfile.css">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/css/bootstrap.min.css" rel="stylesheet">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
 </head>
 
 <body>
     <div class="container light-style flex-grow-1 container-p-y">
         <h4 class="font-weight-bold py-3 mb-4">
-            <img src="https://cdn.hugeicons.com/icons/user-circle-02-stroke-rounded.svg" alt="user-circle-02" width="60" height="60" />  My profile 
+            Account settings
         </h4>
         <div class="card overflow-hidden">
             <div class="row no-gutters row-bordered row-border-light">
@@ -24,17 +20,16 @@
                     <div class="list-group list-group-flush account-settings-links">
                         <a class="list-group-item list-group-item-action active" data-toggle="list"
                             href="#account-general">General</a>
-                      
                         <a class="list-group-item list-group-item-action" data-toggle="list"
-                            href="#account-info">Update Info</a>
-                        <!-- <a class="list-group-item list-group-item-action" data-toggle="list"
-                            href="#account-social-links">Social links</a> -->
-                        <!-- <a class="list-group-item list-group-item-action" data-toggle="list"
-                            href="#account-connections">Connections</a> -->
+                            href="#account-change-password">Change password</a>
+                        <a class="list-group-item list-group-item-action" data-toggle="list"
+                            href="#account-info">Info</a>
+                        <a class="list-group-item list-group-item-action" data-toggle="list"
+                            href="#account-social-links">Social links</a>
+                        <a class="list-group-item list-group-item-action" data-toggle="list"
+                            href="#account-connections">Connections</a>
                         <a class="list-group-item list-group-item-action" data-toggle="list"
                             href="#account-notifications">Notifications</a>
-                        <a class="list-group-item list-group-item-action" data-toggle="list"
-                            href="#">Logout</a>
                     </div>
                 </div>
                 <div class="col-md-9">
@@ -53,36 +48,29 @@
                                 </div>
                             </div>
                             <hr class="border-light m-0">
-                            <table class="table">
-                                <thead>
-                                  <tr>
-                                   
-                                    
-                                  </tr>
-                                </thead>
-                                <tbody>
-                                  <tr>
-                                    <td>Name</td>
-                                    <td>patient</td>
-                                  </tr>
-                                  <tr>     
-                                    <td>Email</td>
-                                    <td>xyz@gmail.com</td>     
-                                  </tr>
-                                  <tr>     
-                                    <td>Contact no.</td>
-                                    <td>12334567890</td>     
-                                  </tr>
-                                  <tr>     
-                                    <td>Address</td>
-                                    <td>abc coloni giet campus</td>     
-                                  </tr>
-                                  
-                                </tbody>
-                              </table>
-
+                            <div class="card-body">
+                                <div class="form-group">
+                                    <label class="form-label">Username</label>
+                                    <input type="text" class="form-control mb-1" value="nmaxwell">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Name</label>
+                                    <input type="text" class="form-control" value="Nelle Maxwell">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">E-mail</label>
+                                    <input type="text" class="form-control mb-1" value="nmaxwell@mail.com">
+                                    <div class="alert alert-warning mt-3">
+                                        Your email is not confirmed. Please check your inbox.<br>
+                                        <a href="javascript:void(0)">Resend confirmation</a>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Company</label>
+                                    <input type="text" class="form-control" value="Company Ltd.">
+                                </div>
+                            </div>
                         </div>
-
                         <div class="tab-pane fade" id="account-change-password">
                             <div class="card-body pb-2">
                                 <div class="form-group">
@@ -101,110 +89,38 @@
                         </div>
                         <div class="tab-pane fade" id="account-info">
                             <div class="card-body pb-2">
-                                <div class="container">
-                                    <div class="form-box">
-                                        <form id="registration-form">
-                                            <div class="heading">
-                                                <h1>Hospital Appointment Registration Form</h1>
-                                            </div>
-                                            <!-- Personal Details Section -->
-                                            
-                                            <div class="form">
-
-                                            <form action="">
-
-                                           
-
-                                            <div class="form-section">
-                                                <p>Personal Details</p>
-                                                <div class="container2">
-                                                    <div class="inc">
-                                                        <label for="full-name">Full Name:</label>
-                                                        <input type="text" id="full-name" name="full_name" required placeholder="Full Name">
-                                                    </div>
-                                                    <div class="inc">
-                                                        <label for="dob">Date of Birth:</label>
-                                                        <input type="date" id="dob" name="dob" required>
-                                                    </div>
-                                                    <div class="inc">
-                                                        <label for="email">Email:</label>
-                                                        <input type="email" id="email" name="email" required placeholder="example@email.com">
-                                                    </div>
-                                                    <div class="inc">
-                                                        <label for="mobile">Mobile Number:</label>
-                                                        <input type="tel" id="mobile" name="mobile" required placeholder="Mobile Number">
-                                                    </div>
-                                                    <div class="inc">
-                                                        <label for="gender">Gender:</label>
-                                                        <select name="gender" id="gender">
-                                                            <option value="">Select</option>
-                                                            <option value="male">Male</option>
-                                                            <option value="female">Female</option>
-                                                            <option value="other">Other</option>
-                                                        </select>
-                                                    </div>
-                                                    <div class="inc">
-                                                        <label for="occupation">Occupation:</label>
-                                                        <input type="text" id="occupation" name="occupation" placeholder="Occupation">
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <!-- Medical Details Section -->
-                                            <div class="form-section">
-                                                <p>Medical Details</p>
-                                                <div class="container2">
-                                                    <div class="inc">
-                                                        <label for="walking-data">Walking Data:</label>
-                                                        <input type="number" id="walking-data" name="walking_data" required placeholder="2000 steps">
-                                                    </div>
-                                                    <div class="inc">
-                                                        <label for="heart-rate">Heart Rate:</label>
-                                                        <input type="number" id="heart-rate" name="heart_rate" required placeholder="Heart beats">
-                                                    </div>
-                                                    <div class="inc">
-                                                        <label for="respiratory-rate">Respiratory Rate:</label>
-                                                        <input type="number" id="respiratory-rate" name="respiratory_rate" required placeholder="Breaths/min">
-                                                    </div>
-                                                    <div class="inc">
-                                                        <label for="blood-pressure">Blood Pressure:</label>
-                                                        <input type="text" id="blood-pressure" name="blood_pressure" required placeholder="120 mmHG">
-                                                    </div>
-                                                    <div class="inc">
-                                                        <label for="calories">Calories:</label>
-                                                        <input type="number" id="calories" name="calories" required placeholder="2500 kcal">
-                                                    </div>
-                                                    <div class="inc">
-                                                        <label for="sleep-quality">Sleep Quality:</label>
-                                                        <input type="text" id="sleep-quality" name="sleep_quality" required placeholder="8 hrs">
-                                                    </div>
-                                                    <div class="inc">
-                                                        <label for="temperature">Temperature:</label>
-                                                        <input type="number" id="temperature" name="temperature" required placeholder="Temperature">
-                                                    </div>
-                                                    <div class="inc">
-                                                        <label for="early-diagnostics">Early Diagnostic Reports:</label>
-                                                        <input type="file" id="early-diagnostics" name="early_diagnostics" multiple>
-                                                    </div>
-                                                    <div class="inc">
-                                                        <label for="ecg">ECG Information:</label>
-                                                        <input type="text" id="ecg" name="ecg" placeholder="ECG Information">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </form>
-                                        </div>
-                                            <!-- Submit Button -->
-                                            <div class="submit-container">
-                                                <button type="submit">Submit</button>
-                                            </div>
-                                        </form>
-                                    </div>
+                                <div class="form-group">
+                                    <label class="form-label">Bio</label>
+                                    <textarea class="form-control"
+                                        rows="5">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris nunc arcu, dignissim sit amet sollicitudin iaculis, vehicula id urna. Sed luctus urna nunc. Donec fermentum, magna sit amet rutrum pretium, turpis dolor molestie diam, ut lacinia diam risus eleifend sapien. Curabitur ac nibh nulla. Maecenas nec augue placerat, viverra tellus non, pulvinar risus.</textarea>
                                 </div>
-                            
-
+                                <div class="form-group">
+                                    <label class="form-label">Birthday</label>
+                                    <input type="text" class="form-control" value="May 3, 1995">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Country</label>
+                                    <select class="custom-select">
+                                        <option>USA</option>
+                                        <option selected>Canada</option>
+                                        <option>UK</option>
+                                        <option>Germany</option>
+                                        <option>France</option>
+                                    </select>
+                                </div>
                             </div>
-                            
+                            <hr class="border-light m-0">
+                            <div class="card-body pb-2">
+                                <h6 class="mb-4">Contacts</h6>
+                                <div class="form-group">
+                                    <label class="form-label">Phone</label>
+                                    <input type="text" class="form-control" value="+0 (123) 456 7891">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Website</label>
+                                    <input type="text" class="form-control" value>
+                                </div>
+                            </div>
                         </div>
                         <div class="tab-pane fade" id="account-social-links">
                             <div class="card-body pb-2">
@@ -331,12 +247,14 @@
                 </div>
             </div>
         </div>
-       
+        <div class="text-right mt-3">
+            <button type="button" class="btn btn-primary">Save changes</button>&nbsp;
+            <button type="button" class="btn btn-default">Cancel</button>
+        </div>
     </div>
     <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
     <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script type="text/javascript">
 
     </script>

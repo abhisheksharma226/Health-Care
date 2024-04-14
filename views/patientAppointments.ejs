@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Appointment</title>
+  <link rel="stylesheet" href="/patientAppointment.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+ 
+  
+</head>
+<body>
+  
+  <header class="header">
+
+    <a href="#" class="logo"> <i class="fas fa-heartbeat"></i> <strong>Welcome <%= patientName %></strong> </a>
+
+
+    <!-- NAVBAR -->
+    <nav class="navbar" style="display: flex;">
+      
+      <div class="dropdown">
+
+        <a href="#profile" style="display: flex; justify-content: center; align-items : center; ">Profile <img src="https://cdn.hugeicons.com/icons/user-circle-stroke-rounded.svg" alt="user-circle" width="24" height="24" /></a>
+
+        <div class="dropdown-content">
+          <a href="/patient/patientProfile">My Profile</a>
+          <a href="/patient/logout">Log Out</a>
+        </div>
+      </div>
+     
+    </nav>
+    
+
+    <div id="menu-btn" class="fas fa-bars"></div>
+
+</header>
+
+
+<!-- MAIN PART -->
+
+<div class="card">
+  <% patientAppointments.forEach(appointment => { %>
+    <div class="card">
+      <h2 class="card-title"><%= appointment.name %></h2>
+      <h3 class="card-subtitle"><%= appointment.date %></h3>
+      <p class="card-content">Time: <%= appointment.time %></p>
+      <a href="#" class="card-link">Learn More</a>
+    </div>
+  <% }) %>
+</div>
+
+
+
+
+    
+<!-- FOOTER -->
+
+<section class="footer">
+
+  <div class="box-container">
+
+      <div class="box">
+          <h3>quick links</h3>
+          <a href="#home"> <i class="fas fa-chevron-right"></i> home </a>
+          <a href="#about"> <i class="fas fa-chevron-right"></i> about </a>
+          <a href="#services"> <i class="fas fa-chevron-right"></i> services </a>
+          <a href="#doctors"> <i class="fas fa-chevron-right"></i> doctors </a>
+          <a href="#appointment"> <i class="fas fa-chevron-right"></i> appointment </a>
+          <a href="#review"> <i class="fas fa-chevron-right"></i> review </a>
+          <a href="#blogs"> <i class="fas fa-chevron-right"></i> blogs </a>
+      </div>
+
+      <div class="box">
+          <h3>our services</h3>
+          <a href="#"> <i class="fas fa-chevron-right"></i> dental care </a>
+          <a href="#"> <i class="fas fa-chevron-right"></i> message therapy </a>
+          <a href="#"> <i class="fas fa-chevron-right"></i> cardioloty </a>
+          <a href="#"> <i class="fas fa-chevron-right"></i> diagnosis </a>
+          <a href="#"> <i class="fas fa-chevron-right"></i> ambulance service </a>
+      </div>
+
+      <div class="box">
+          <h3>appointment info</h3>
+          <a href="#"> <i class="fas fa-phone"></i> +91 7688238801 </a>
+          <a href="#"> <i class="fas fa-phone"></i> +91 8178254697 </a>
+          <a href="#"> <i class="fas fa-envelope"></i> sasmaldhiraj@gmail.com</a>
+          <a href="#"> <i class="fas fa-envelope"></i> healthcare@gmail.com </a>
+          <a href="#"> <i class="fas fa-map-marker-alt"></i> gietu,gunupur </a>
+      </div>
+
+      <div class="box">
+          <h3>follow us</h3>
+          <a href="#"> <i class="fab fa-faceappointment-f"></i> faceappointment </a>
+          <a href="#"> <i class="fab fa-twitter"></i> twitter </a>
+          <a href="#"> <i class="fab fa-twitter"></i> twitter </a>
+          <a href="#"> <i class="fab fa-instagram"></i> instagram </a>
+          <a href="#"> <i class="fab fa-linkedin"></i> linkedin </a>
+          <a href="#"> <i class="fab fa-pinterest"></i> pinterest </a>
+      </div>
+
+  </div>
+
+
+</section>
+
+  
+  
+  </div>
+
+
+</body>
+</html>

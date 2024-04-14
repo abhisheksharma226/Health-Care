@@ -3,11 +3,11 @@ const Doctor = require("../models/doctor");
 
 const router = Router();
 
-router.get("/login" , (req , res) => {
+router.get("/drLogin" , (req , res) => {
     return res.render("drLogin"); 
 })
 
-router.get("/signup" , (req , res) => {
+router.get("/drSignup" , (req , res) => {
     return res.render("drSignup");
 })
 
@@ -15,7 +15,11 @@ router.get("/drHome" , (req , res) => {
     return res.render("drHome");
 })
 
-router.post("/login" , async(req , res) => {
+router.get("/drProfile" , (req ,res) => {
+    return res.render("drProfile");
+})
+
+router.post("/drLogin" , async(req , res) => {
     const { dremail , drpassword } = req.body;
 
     try {
@@ -30,15 +34,29 @@ router.post("/login" , async(req , res) => {
 })
 
 
-router.post("/signup" , async(req , res) => {
+router.post("/drSignup" , async(req , res) => {
     const { drname , dremail , drpassword } = req.body;
-    
+
+    try {
+        const existingDoctor = await Doctor.findOne({ email: dremail });
+        if (existingDoctor) {
+            return res.render("drSignup", {
+                error: "Email Already Exist!"
+            });
+            
+        }
     await Doctor.create({
         drname , 
-        dremail , 
+        email: dremail , 
         drpassword, 
     })
     return res.redirect("drHome");
+    
+} catch (error) {
+    return res.render("drSignup" , {
+        error : "Email Already !"
+    })
+}
 })
 
 

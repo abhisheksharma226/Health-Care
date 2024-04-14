@@ -6,10 +6,6 @@
     box-sizing: border-box;
     font-family: 'Poppins',sans-serif;
 }
-
-
-
-
 body{
     display: flex;
     justify-content: center;
@@ -17,7 +13,7 @@ body{
     min-height: 100vh;
     background: #dfdfdf;
 }
-.signup-box{
+.login-box{
     display: flex;
     justify-content: center;
     flex-direction: column;
@@ -25,11 +21,11 @@ body{
     height: 480px;
     padding: 30px;
 }
-.signup-header{
+.login-header{
     text-align: center;
     margin: 20px 0 40px 0;
 }
-.signup-header header{
+.login-header header{
     color: #333;
     font-size: 30px;
     font-weight: 600;
@@ -102,14 +98,12 @@ section a{
     background: #000;
     transform: scale(1.05,1);
 }
-.login-link{
+.sign-up-link{
     text-align: center;
     font-size: 15px;
     margin-top: 20px;
 }
-.login-link a{
+.sign-up-link a{
     color: #000;
     font-weight: 600;
 }
-
-
