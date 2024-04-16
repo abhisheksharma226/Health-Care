@@ -9,6 +9,7 @@
     <title>Profile</title>
     <link rel="stylesheet" href="/patientProfile.css">
     <link rel="stylesheet" href="/patientCollections.css">
+   
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/css/bootstrap.min.css" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
 </head>
@@ -33,8 +34,11 @@
                             href="#account-connections">Connections</a> -->
                         <a class="list-group-item list-group-item-action" data-toggle="list"
                             href="#account-notifications">Notifications</a>
-                        <a class="list-group-item list-group-item-action" data-toggle="list"
-                            href="#">Logout</a>
+
+                      <a class="list-group-item list-group-item-action" 
+    href="/patient/logout"
+    onclick="return confirm('Are you sure you want to logout?')">Logout</a>
+
                     </div>
                 </div>
                 <div class="col-md-9">
@@ -54,28 +58,23 @@
                             </div>
                             <hr class="border-light m-0">
                             <table class="table">
-                                <thead>
-                                  <tr>
-                                   
-                                    
-                                  </tr>
-                                </thead>
+                                
                                 <tbody>
                                   <tr>
                                     <td>Name</td>
-                                    <td>patient</td>
+                                    <td><%= patientName %></td>
                                   </tr>
                                   <tr>     
                                     <td>Email</td>
-                                    <td>xyz@gmail.com</td>     
+                                    <td><%= patientEmail %></td>     
                                   </tr>
                                   <tr>     
                                     <td>Contact no.</td>
-                                    <td>12334567890</td>     
+                                    <td><%= patientNumber %></td>     
                                   </tr>
                                   <tr>     
-                                    <td>Address</td>
-                                    <td>abc coloni giet campus</td>     
+                                    <td>Gender</td>
+                                    <td><%= patientGender %></td>     
                                   </tr>
                                   
                                 </tbody>
@@ -103,39 +102,36 @@
                             <div class="card-body pb-2">
                                 <div class="container">
                                     <div class="form-box">
-                                        <form id="registration-form">
+                                        <form id="registration-form" action="/patient/updatePatientData" method="post">
                                             <div class="heading">
-                                                <h1>Hospital Appointment Registration Form</h1>
+                                                <h1>Updation Form</h1>
                                             </div>
                                             <!-- Personal Details Section -->
                                             
                                             <div class="form">
 
-                                            <form action="">
-
-                                           
-
+                                            
                                             <div class="form-section">
                                                 <p>Personal Details</p>
                                                 <div class="container2">
                                                     <div class="inc">
                                                         <label for="full-name">Full Name:</label>
-                                                        <input type="text" id="full-name" name="full_name" required placeholder="Full Name">
+                                                        <input type="text" id="fullName" name="fullName" required placeholder="<%= patientName %>">
                                                     </div>
                                                     <div class="inc">
                                                         <label for="dob">Date of Birth:</label>
-                                                        <input type="date" id="dob" name="dob" required>
+                                                        <input type="date" id="dob" name="dob" required placeholder="<%= patientDOB %>">
                                                     </div>
                                                     <div class="inc">
                                                         <label for="email">Email:</label>
-                                                        <input type="email" id="email" name="email" required placeholder="example@email.com">
+                                                        <input type="email" id="email" name="email" required placeholder="<%= patientEmail %>">
                                                     </div>
                                                     <div class="inc">
                                                         <label for="mobile">Mobile Number:</label>
-                                                        <input type="tel" id="mobile" name="mobile" required placeholder="Mobile Number">
+                                                        <input type="tel" id="mobile" name="mobile" required placeholder="<%= patientNumber %> ">
                                                     </div>
                                                     <div class="inc">
-                                                        <label for="gender">Gender:</label>
+                                                        <label for="gender" >Gender:</label>
                                                         <select name="gender" id="gender">
                                                             <option value="">Select</option>
                                                             <option value="male">Male</option>
@@ -145,7 +141,7 @@
                                                     </div>
                                                     <div class="inc">
                                                         <label for="occupation">Occupation:</label>
-                                                        <input type="text" id="occupation" name="occupation" placeholder="Occupation">
+                                                        <input type="text" id="occupation" name="occupation" placeholder=" <%= patientOccupation %> ">
                                                     </div>
                                                 </div>
                                             </div>
@@ -156,49 +152,46 @@
                                                 <div class="container2">
                                                     <div class="inc">
                                                         <label for="walking-data">Walking Data:</label>
-                                                        <input type="number" id="walking-data" name="walking_data" required placeholder="2000 steps">
+                                                        <input type="number" id="walkingData" name="walkingData" required placeholder="<%= patientwd %>">
                                                     </div>
                                                     <div class="inc">
                                                         <label for="heart-rate">Heart Rate:</label>
-                                                        <input type="number" id="heart-rate" name="heart_rate" required placeholder="Heart beats">
+                                                        <input type="number" id="heartRate" name="heartRate" required placeholder="<%= patienthr %>">
                                                     </div>
                                                     <div class="inc">
                                                         <label for="respiratory-rate">Respiratory Rate:</label>
-                                                        <input type="number" id="respiratory-rate" name="respiratory_rate" required placeholder="Breaths/min">
+                                                        <input type="number" id="respiratoryRate" name="respiratoryRate" required placeholder="<%= patientrr %>">
                                                     </div>
                                                     <div class="inc">
                                                         <label for="blood-pressure">Blood Pressure:</label>
-                                                        <input type="text" id="blood-pressure" name="blood_pressure" required placeholder="120 mmHG">
+                                                        <input type="text" id="bloodPressure" name="bloodPressure" required placeholder="<%= patientbp %>">
                                                     </div>
                                                     <div class="inc">
                                                         <label for="calories">Calories:</label>
-                                                        <input type="number" id="calories" name="calories" required placeholder="2500 kcal">
+                                                        <input type="number" id="calories" name="calories" required placeholder="<%= patientcl %>">
                                                     </div>
                                                     <div class="inc">
                                                         <label for="sleep-quality">Sleep Quality:</label>
-                                                        <input type="text" id="sleep-quality" name="sleep_quality" required placeholder="8 hrs">
+                                                        <input type="text" id="sleepQuality" name="sleepQuality" required placeholder="<%= patientsq %>">
                                                     </div>
                                                     <div class="inc">
                                                         <label for="temperature">Temperature:</label>
-                                                        <input type="number" id="temperature" name="temperature" required placeholder="Temperature">
+                                                        <input type="number" id="temperature" name="temperature" required placeholder="<%= patienttmp %>">
                                                     </div>
-                                                    <div class="inc">
-                                                        <label for="early-diagnostics">Early Diagnostic Reports:</label>
-                                                        <input type="file" id="early-diagnostics" name="early_diagnostics" multiple>
-                                                    </div>
+                                                   
                                                     <div class="inc">
                                                         <label for="ecg">ECG Information:</label>
-                                                        <input type="text" id="ecg" name="ecg" placeholder="ECG Information">
+                                                        <input type="text" id="ecgInformation" name="ecgInformation" placeholder="<%= patientecg %>">
                                                     </div>
                                                 </div>
                                             </div>
-                                        </form>
                                         </div>
-                                            <!-- Submit Button -->
-                                            <div class="submit-container">
-                                                <button type="submit">Submit</button>
-                                            </div>
-                                        </form>
+                                        <!-- Submit Button -->
+                                        <div class="submit-container">
+                                            <button type="submit">Update</button>
+                                        </div>
+                                    </form>
+                                        
                                     </div>
                                 </div>
                             
@@ -257,76 +250,28 @@
                                     <strong>Instagram</strong></button>
                             </div>
                         </div>
+
+
+
+                        <!-- NOTIFICATION FFOR APPPOINTED CARD -->
                         <div class="tab-pane fade" id="account-notifications">
                             <div class="card-body pb-2">
-                                <h6 class="mb-4">Activity</h6>
-                                <div class="form-group">
-                                    <label class="switcher">
-                                        <input type="checkbox" class="switcher-input" checked>
-                                        <span class="switcher-indicator">
-                                            <span class="switcher-yes"></span>
-                                            <span class="switcher-no"></span>
-                                        </span>
-                                        <span class="switcher-label">Email me when someone comments on my article</span>
-                                    </label>
-                                </div>
-                                <div class="form-group">
-                                    <label class="switcher">
-                                        <input type="checkbox" class="switcher-input" checked>
-                                        <span class="switcher-indicator">
-                                            <span class="switcher-yes"></span>
-                                            <span class="switcher-no"></span>
-                                        </span>
-                                        <span class="switcher-label">Email me when someone answers on my forum
-                                            thread</span>
-                                    </label>
-                                </div>
-                                <div class="form-group">
-                                    <label class="switcher">
-                                        <input type="checkbox" class="switcher-input">
-                                        <span class="switcher-indicator">
-                                            <span class="switcher-yes"></span>
-                                            <span class="switcher-no"></span>
-                                        </span>
-                                        <span class="switcher-label">Email me when someone follows me</span>
-                                    </label>
-                                </div>
+                                
+
+                                
+
+
+                                
+
+
+
+
                             </div>
                             <hr class="border-light m-0">
-                            <div class="card-body pb-2">
-                                <h6 class="mb-4">Application</h6>
-                                <div class="form-group">
-                                    <label class="switcher">
-                                        <input type="checkbox" class="switcher-input" checked>
-                                        <span class="switcher-indicator">
-                                            <span class="switcher-yes"></span>
-                                            <span class="switcher-no"></span>
-                                        </span>
-                                        <span class="switcher-label">News and announcements</span>
-                                    </label>
-                                </div>
-                                <div class="form-group">
-                                    <label class="switcher">
-                                        <input type="checkbox" class="switcher-input">
-                                        <span class="switcher-indicator">
-                                            <span class="switcher-yes"></span>
-                                            <span class="switcher-no"></span>
-                                        </span>
-                                        <span class="switcher-label">Weekly product updates</span>
-                                    </label>
-                                </div>
-                                <div class="form-group">
-                                    <label class="switcher">
-                                        <input type="checkbox" class="switcher-input" checked>
-                                        <span class="switcher-indicator">
-                                            <span class="switcher-yes"></span>
-                                            <span class="switcher-no"></span>
-                                        </span>
-                                        <span class="switcher-label">Weekly blog digest</span>
-                                    </label>
-                                </div>
-                            </div>
                         </div>
+
+
+
                     </div>
                 </div>
             </div>

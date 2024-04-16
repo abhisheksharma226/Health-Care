@@ -6,6 +6,7 @@
   <title>Home Page</title>
   <link rel="stylesheet" href="/patientHome.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 </head>
 <body>
   
@@ -29,7 +30,7 @@
       <div class="dropdown">
         <a href="">Profile</a>
         <div class="dropdown-content">
-          <a href="/patient/patientProfile">My Profile</a>
+          <a href="/patient/patientProfile"> My Profile</a>
           <a href="/patient/logout">Log Out</a>
         </div>
       </div>
@@ -46,9 +47,57 @@
 
     <div class="first" style="display: flex;">
 
+
+
+      <!-- Ai Result -->
+
       <div class="left">
-        <!-- For AI result -->
+       
+        <section class="appointment" id="appointment">
+          <div class="row">
+              <div class="image">
+                  <img src="image/appointment-img.svg" alt="">
+              </div>
+              <div class="report">
+                  <h3>Medical Report</h3>
+                  <table id="medical-table">
+                      <tr>
+                          <td><strong>Name </strong></td>
+                          <td id="name"><%= patientName %></td>
+                      </tr>
+                      <tr>
+                        <td><strong>PId</strong></td>
+                        <td><%= patientId %> </td>
+                    </tr>
+                      <tr>
+                          <td><strong>Disease  </strong></td>
+                          <td id="email">Fever</td>
+                      </tr>
+                      <tr>
+                          <td><strong>Email </strong></td>
+                          <td id="email"><%= patientEmail %></td>
+                      </tr>
+                      <tr>
+                        <td><strong>Date </strong></td>
+                        <td id="date"></td>
+                    </tr>
+                    
+                     
+                  </table>
+              </div>
+          </div>
+      </section>
+      
+      
       </div>
+
+
+
+
+
+
+
+
 
 
       <!-- APPOINTMENT FORM -->
@@ -72,6 +121,17 @@
                   <input type="email"name="email" id="email" placeholder="Your email" class="box">
                   <input type="date"name="date" class="box" id="date" placeholder="Date">
                   <input type="time"name="time" class="box" id="time" placeholder="Time">
+
+                 <!-- Error Control -->
+                 <% if (locals.error) { %>
+                    <div class="container-fluid">
+                        <div class="alert alert-danger py-2" role="alert">
+                            <%= locals.error %>
+                        </div>
+                    </div>
+                <% } %>
+
+
                   <input type="submit" name="submit" value="Book a appointment" class="btn">
               </form>
       
@@ -388,42 +448,63 @@
 <script>
     // Sample data for demonstration purposes
     var citiesByState = {
-        state1: ['Ganjam', 'Rayagada', 'Cuttack', 'Sambalpur', 'Khorda', 'Sundarghar'],
-        // state2: ['City X', 'City Y', 'City Z']
-    };
+      state1: ['Ganjam', 'Rayagada', 'Cuttack','Sambalpur','Khorda','Sundarghar','puri','Keonjhar','koraput','kalahandi',],
+      // state2: ['City X', 'City Y', 'City Z']
+  };
 
-    var hospitalsByCity = {
-        'Ganjam': [
-            { name: 'Amit Hospital', address: 'Ganjam, Odisha' },
-            { name: 'Aashta Hospital', address: 'Ganjam, Odisha' },
-            { name: 'MKCG Hospital', address: 'Ganjam, Odisha' }
-        ],
-        'Rayagada': [
-            { name: 'Distrit Hospital Rayagada', address: 'Rayagada, Odisha' },
-            { name: 'Christian Hospital Rayagada', address: 'Rayagada, Odisha' },
-            { name: 'Somonath Meorial Hospital', address: 'Rayagada, Odisha' }
-        ],
-        'Cuttack': [
-            { name: 'Cuttack SCB Hospital', address: 'Cuttack, Odisha' },
-            { name: 'Sun Hospital', address: 'Cuttack, Odisha' },
-            { name: 'Chanayak Hospital', address: 'Cuttack, Odisha' }
-        ],
-        'Sambalpur': [
-            { name: 'Burla Medical', address: 'Sambalpur, Odisha' },
-            { name: 'Binayak Hospital', address: 'Sambalpur, Odisha' },
-            { name: 'Aarogyam Hospital', address: 'Sambalpur, Odisha' }
-        ],
-        'Khorda': [
-            { name: 'Aims Hospital', address: 'Khorda, Odisha' },
-            { name: 'Aapolo Hospital', address: 'Khorda, Odisha' },
-            { name: 'Utkal Hospital', address: 'Khorda, Odisha' }
-        ],
-        'Sundarghar': [
-            { name: 'KTH Hospital', address: 'Sundarghar, Odisha' },
-            { name: 'Life Line Hospital', address: 'Sundarghar, Odisha' },
-            { name: 'Rourkela Govt. Hospital', address: 'Sundarghar, Odisha' }
-        ]
-    };
+  var hospitalsByCity = {
+    'Ganjam': [
+        { name: 'Amit Hospital', address: 'Ganjam, Odisha' },
+        { name: 'Aashta Hospital', address: 'Ganjam, Odisha' },
+        { name: 'MKCG Hospital', address: 'Ganjam, Odisha' }
+    ],
+    'Rayagada': [
+        { name: 'Distrit Hospital Rayagada', address: 'Rayagada, Odisha' },
+        { name: 'Christian Hospital Rayagada', address: 'Rayagada, Odisha' },
+        { name: 'Somonath Meorial Hospital', address: 'Rayagada, Odisha' }
+    ],
+    'Cuttack': [
+        { name: 'Cuttack SCB Hospital', address: 'Cuttack, Odisha' },
+        { name: 'Sun Hospital', address: 'Cuttack, Odisha' },
+        { name: 'Chanayak Hospital', address: 'Cuttack, Odisha' }
+    ],
+    'Sambalpur': [
+        { name: 'Burla Medical', address: 'Sambalpur, Odisha' },
+        { name: 'Binayak Hospital', address: 'Sambalpur, Odisha' },
+        { name: 'Aarogyam Hospital', address: 'Sambalpur, Odisha' }
+    ],
+    'Khorda': [
+        { name: 'Aims Hospital', address: 'Khorda, Odisha' },
+        { name: 'Aapolo Hospital', address: 'Khorda, Odisha' },
+        { name: 'Utkal Hospital', address: 'Khorda, Odisha' }
+    ],
+    'Sundarghar': [
+        { name: 'KTH Hospital', address: 'Sundarghar, Odisha' },
+        { name: 'Life Line Hospital', address: 'Sundarghar, Odisha' },
+        { name: 'Rourkela Govt. Hospital', address: 'Sundarghar, Odisha' }
+    ],
+    'puri': [
+        { name: 'Shree Sai Hospital', address: 'Puri, Odisha' },
+        { name: 'Puri Distrit Hospital', address: 'Puri, Odisha' },
+        { name: 'Devaki Hospital', address: 'Puri, Odisha' }
+    ],
+    'Keonjhar': [
+        { name: 'HIMA Hospital', address: 'Keonjhar, Odisha' },
+        { name: 'Saidev Hospital', address: 'Keonjhar, Odisha' },
+        { name: 'Keonjhar Hospital', address: 'Keonjhar, Odisha' }
+    ],
+    'koraput': [
+        { name: 'usha Hospital', address: 'koraput, Odisha' },
+        { name: 'Distrit Headquater Hospital', address: 'koraput, Odisha' },
+        { name: 'Care One Hospital', address: 'koraput, Odisha' }
+    ],
+    'kalahandi': [
+        { name: 'Kesinga New Govt Hospital', address: 'kalahandi, Odisha' },
+        { name: 'vedanto Hospital', address: 'kalahandi, Odisha' },
+        { name: 'Narla Govt. Hospital', address: 'kalahandi, Odisha' }
+    ]
+};
+
 
     // Function to create a card element
     function createHospitalCard(name, address) {
@@ -543,4 +624,17 @@
 
 
 </body>
+
+<script>
+  // Get the current date
+  var currentDate = new Date();
+
+  // Format the date as YYYY-MM-DD
+  var formattedDate = currentDate.toISOString().slice(0, 10);
+
+  // Update the content of the element with id "date"
+  document.getElementById("date").textContent = formattedDate;
+
+
+</script>
 </html>

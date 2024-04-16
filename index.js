@@ -5,6 +5,8 @@ const { checkForAuthenticationCookie } = require("./middlewares/authentication")
 const cookieParser = require("cookie-parser");
 
 
+
+
 const app = express();
 const PORT = 3000;
 
@@ -27,6 +29,15 @@ app.set("views" , path.resolve("./views"));
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(checkForAuthenticationCookie("token"));
+
+
+
+
+
+
+
+
+
 
 
 app.get("/" , (req , res) => {

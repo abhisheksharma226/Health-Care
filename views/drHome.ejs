@@ -1,71 +1,54 @@
 <!DOCTYPE html>
-
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Home Page</title>
-    <link rel="stylesheet" href="/drHome.css" />
-    
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" />
-  </head>
-  <body>
-    <nav class="sidebar">
-      <a href="#" class="logo">HealtCare</a>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Home Page</title>
+  <!-- <link rel="stylesheet" href="/drHome.css"> -->
+  <link rel="stylesheet" href="/patientHome.css">
+  <link rel="stylesheet" href="/patientAppointment.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body>
+  
+  <header class="header">
 
-      <div class="menu-content">
-        <ul class="menu-items">
-            
-          <li class="item">
-            <a href="/doctor/drProfile">My Profile</a>
-          </li>
+    <a href="#" class="logo"> <i class="fas fa-heartbeat"></i> <strong>Welcome Dr. <%= doctorName %></strong> </a>
 
-          <li class="item">
-            <a href="#">Dark Mode</a>
-          </li>
 
-          <li class="item">
-            <a href="#">Log Out</a>
-          </li>
-        </ul>
+    <!-- NAVBAR -->
+    <nav class="navbar" style="display: flex;">
+      
+
+      <div class="dropdown">
+        <a href="">Profile</a>
+        <div class="dropdown-content">
+          <a href="/doctor/drProfile" > My Profile</a>
+          <a href="/doctor/logout">Log Out</a>
+        </div>
       </div>
+     
     </nav>
+    
 
-    <nav class="navbar">
-      <i class="fa-solid fa-bars" id="sidebar-close"></i>
-    </nav>
+    <div id="menu-btn" class="fas fa-bars"></div>
 
-    <main class="main">
-      <h1>Doctor Dashboard</h1>
-    </main>
+</header>
 
-    <script>
-        const sidebar = document.querySelector(".sidebar");
-const sidebarClose = document.querySelector("#sidebar-close");
-const menu = document.querySelector(".menu-content");
-const menuItems = document.querySelectorAll(".submenu-item");
-const subMenuTitles = document.querySelectorAll(".submenu .menu-title");
 
-sidebarClose.addEventListener("click", () => sidebar.classList.toggle("close"));
+<!-- CARDS -->
 
-menuItems.forEach((item, index) => {
-  item.addEventListener("click", () => {
-    menu.classList.add("submenu-active");
-    item.classList.add("show-submenu");
-    menuItems.forEach((item2, index2) => {
-      if (index !== index2) {
-        item2.classList.remove("show-submenu");
-      }
-    });
-  });
-});
 
-subMenuTitles.forEach((title) => {
-  title.addEventListener("click", () => {
-    menu.classList.remove("submenu-active");
-  });
-});
-    </script>
-  </body>
+
+
+
+</div>
+
+
+  
+
+</body>
+
+
 </html>

@@ -13,7 +13,11 @@ router.get("/signup" , (req , res) => {
     return res.render("signup");
 })
 
-router.get("/patientCollection" , (req , res) => {
+router.get("/patientCollection" , async (req , res) => {
+    const loggedInPatient = await patient.findOne({});
+        if (!loggedInPatient) {
+            return res.render("login", { error: "No patient found" });
+        }
     return res.render("patientCollection");
 })
 
@@ -21,9 +25,14 @@ router.get("/patientCollection" , (req , res) => {
 router.get("/patientHome", async (req, res) => {
     try {
        
-        const loggedInPatient = await patient.findOne({});
-        
-        return res.render("patientHome", { patientName: loggedInPatient.name });
+        const loggedInPatientData = await patientData.findOne({});
+        if (!loggedInPatientData) {
+            
+            return res.render("login", { error: "No patient found" });
+        }
+
+
+        return res.render("patientHome", { patientId : loggedInPatientData._id , patientName: loggedInPatientData.fullName , patientEmail : loggedInPatientData.email });
     } catch (error) {
         console.error("Error fetching patient name:", error);
         return res.render("patientHome");
@@ -31,8 +40,42 @@ router.get("/patientHome", async (req, res) => {
 });
 
 
-router.get("/patientProfile" , (req , res) => {
-    return res.render("patientProfile")
+router.get("/patientProfile" , async (req , res) => {
+    
+    try {
+       
+        const loggedInPatientData = await patientData.findOne({});
+        // if (!loggedInPatient) {
+        //     console.error("No patient found");
+        //     return res.render("login", { error: "No patient found" });
+        // }
+
+         
+        
+        
+        return res.render("patientProfile", { 
+            patientName: loggedInPatientData.fullName , 
+            patientDOB : loggedInPatientData.dob , 
+            patientEmail : loggedInPatientData.email , 
+            patientNumber : loggedInPatientData.mobile ,
+            patientGender : loggedInPatientData.gender ,
+            patientOccupation : loggedInPatientData.occupation , 
+            patientwd : loggedInPatientData.walkingData , 
+            patienthr : loggedInPatientData.heartRate , 
+            patientrr : loggedInPatientData.respiratoryRate , 
+            patientcl : loggedInPatientData.calories , 
+            patientbp : loggedInPatientData.bloodPressure , 
+            patientsq : loggedInPatientData.sleepQuality , 
+            patienttmp : loggedInPatientData.temperature , 
+            patientecg : loggedInPatientData.ecgInformation , 
+            
+        });
+    } catch (error) {
+        console.error("Error fetching patient name:", error);
+        return res.render("patientProfile");
+    }
+
+    
 })
 
 
@@ -41,13 +84,20 @@ router.get("/patientAppointments", async (req, res) => {
         const loggedInPatient = await patient.findOne({});
         if (!loggedInPatient) {
             console.error("No patient found");
-            return res.render("patientHome", { error: "No patient found" });
+            return res.render("login", { error: "No patient found" });
         }
         
         // Corrected property name
-        const patientAppointments = loggedInPatient.patientAppointments || [];
+        const appointedPatient = await PatientAppointment.findOne({});
         
-        return res.render("patientAppointments", { patientName: loggedInPatient.name, patientAppointments });
+        
+        return res.render("patientAppointments", { 
+            patientName: appointedPatient.name, 
+            patientNumber : appointedPatient.number , 
+            patientEmail : appointedPatient.email , 
+            patientDate : appointedPatient.date.toDateString() , 
+            patientTime : appointedPatient.time ,
+        });
     } catch (error) {
         console.error("Error fetching patient name:", error);
         return res.render("patientHome", { error: "Error fetching patient name" });
@@ -163,6 +213,52 @@ router.post('/patientAppointments', async (req, res) => {
         res.status(500).json({ error: 'An error occurred while creating the appointment' });
     }
 });
+
+
+router.post("/updatePatientData", async (req, res) => {
+    try {
+        const { fullName, dob, email, mobile, gender, occupation, walkingData, heartRate, respiratoryRate, bloodPressure, calories, sleepQuality, temperature, ecgInformation } = req.body;
+
+        // Construct the update object with the new data
+        const updateData = {
+            fullName,
+            dob,
+            mobile,
+            gender,
+            occupation,
+            walkingData,
+            heartRate,
+            respiratoryRate,
+            bloodPressure,
+            calories,
+            sleepQuality,
+            temperature,
+            ecgInformation
+        };
+
+        // Find the existing patient record by email and update it
+        const updatedPatient = await patientData.findOneAndUpdate(
+            { email: email }, // Filter
+            updateData, // Update
+            { new: true } // Options: return the updated document
+        );
+
+        if (!updatedPatient) {
+            return res.status(404).json({ error: 'Patient not found' });
+        }
+
+        return res.redirect("patientHome");
+        
+    } catch (error) {
+        console.error('Error updating patient data:', error);
+        return res.status(500).json({ error: 'Error updating patient data. Please try again.' });
+    }
+});
+
+
+
+
+
 
 
 

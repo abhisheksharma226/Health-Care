@@ -647,13 +647,19 @@
 
 
   .card {
-    width: 300px;
-    background-color: #fff;
+    width: 350px;
+    background-color: #efe9e9;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     padding: 20px;
     margin: 20px;
     margin-top : 123px;
+}
+
+h1{
+    display: flex; 
+    justify-content: center;
+    padding: 10px;
 }
 
 /* Card Title */

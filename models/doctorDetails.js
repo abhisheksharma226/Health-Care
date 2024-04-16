@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const patientDataSchema = new mongoose.Schema({
+const doctorDataSchema = new mongoose.Schema({
     fullName: {
         type: String,
         required: true
@@ -25,21 +25,10 @@ const patientDataSchema = new mongoose.Schema({
         enum: ['male', 'female', 'other'],
         required: true
     },
-    occupation: {
-        type: String,
-        required: true
-    },
-    walkingData: Number,
-    heartRate: Number,
-    respiratoryRate: Number,
-    bloodPressure: Number,
-    calories: Number,
-    sleepQuality: String,
-    temperature: Number,
-    // earlyDiagnosticReports: String,
-    ecgInformation: Number,
+    
+  
 }, { timestamps: true });
 
-const patientData = mongoose.model('patientData', patientDataSchema);
+const doctorData = mongoose.model('doctorData', doctorDataSchema);
 
-module.exports = patientData;
+module.exports = doctorData;
