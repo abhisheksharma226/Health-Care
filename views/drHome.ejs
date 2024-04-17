@@ -8,7 +8,7 @@
   <link rel="stylesheet" href="/patientHome.css">
   <link rel="stylesheet" href="/patientAppointment.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+
 </head>
 <body>
   
@@ -38,11 +38,15 @@
 
 
 <!-- CARDS -->
-
-
-
-
-
+<div class="card">
+  
+  <h1><strong>Your Appointment</strong></h1>
+  <p class="card-content">Patient Name : <%= patientName %></p>
+  <p class="card-content">Pateint Email : <%= patientEmail %></p>
+  <p class="card-content">Patient Number : <%= patientNumber %></p>
+  <p class="card-content">Appointment Date : <%= patientDate %></p>
+  <p class="card-content">Appointment Time : <%= patientTime %></p>
+ 
 </div>
 
 

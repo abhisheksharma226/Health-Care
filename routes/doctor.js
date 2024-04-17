@@ -1,7 +1,7 @@
 const { Router } = require("express");
 const Doctor = require("../models/doctor");
 const doctorData = require("../models/doctorDetails");
-
+const patientappointment = require("../models/patientAppointment");
 
 
 const router = Router();
@@ -27,15 +27,25 @@ router.get("/drHome" ,async (req , res) => {
             // }
             
         const loggedInDoctor = await doctorData.findOne({});
+        const patientappoint = await patientappointment.findOne({});
        
         return res.render("drHome", { 
             doctorName: loggedInDoctor.fullName , 
+            patientName : patientappoint.name ,
+            patientEmail : patientappoint.email ,
+            patientNumber : patientappoint.number ,
+            patientDate : patientappoint.date ,
+            patientTime : patientappoint.time ,
         });
     } catch (error) {
         console.error("Error fetching patient name:", error);
         return res.render("drHome");
     }
 })
+
+
+
+
 
 router.get("/drProfile" , async (req ,res) => {
 

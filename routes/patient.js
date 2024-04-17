@@ -3,6 +3,7 @@ const patient = require("../models/patient");
 const patientData = require("../models/patientData");
 const PatientAppointment = require("../models/patientAppointment");
 
+
 const router = Router();
 
 router.get("/login" , (req , res) => {
@@ -45,14 +46,12 @@ router.get("/patientProfile" , async (req , res) => {
     try {
        
         const loggedInPatientData = await patientData.findOne({});
+        
         // if (!loggedInPatient) {
         //     console.error("No patient found");
         //     return res.render("login", { error: "No patient found" });
         // }
 
-         
-        
-        
         return res.render("patientProfile", { 
             patientName: loggedInPatientData.fullName , 
             patientDOB : loggedInPatientData.dob , 
@@ -90,8 +89,11 @@ router.get("/patientAppointments", async (req, res) => {
         // Corrected property name
         const appointedPatient = await PatientAppointment.findOne({});
         
+
+        
         
         return res.render("patientAppointments", { 
+            patientname : loggedInPatient.name,
             patientName: appointedPatient.name, 
             patientNumber : appointedPatient.number , 
             patientEmail : appointedPatient.email , 
@@ -254,8 +256,6 @@ router.post("/updatePatientData", async (req, res) => {
         return res.status(500).json({ error: 'Error updating patient data. Please try again.' });
     }
 });
-
-
 
 
 
