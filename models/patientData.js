@@ -32,12 +32,12 @@ const patientDataSchema = new mongoose.Schema({
     walkingData: Number,
     heartRate: Number,
     respiratoryRate: Number,
-    bloodPressure: Number,
+    bloodPressure: String,
     calories: Number,
     sleepQuality: String,
     temperature: Number,
     // earlyDiagnosticReports: String,
-    ecgInformation: Number,
+    ecgInformation: String,
 }, { timestamps: true });
 
 const patientData = mongoose.model('patientData', patientDataSchema);

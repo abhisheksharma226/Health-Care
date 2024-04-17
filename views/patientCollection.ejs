@@ -75,7 +75,7 @@
                             <input type="number" id="calories" name="calories" required placeholder="2500 kcal">
                         </div>
                         <div class="inc">
-                            <label for="sleep-quality">Sleep Quality:</label>
+                            <label for="sleep-quality">Sleep Duration:</label>
                             <input type="text" id="sleepQuality" name="sleepQuality" required placeholder="8 hrs">
                         </div>
                         <div class="inc">
@@ -87,8 +87,12 @@
                             <input type="file" id="early-diagnostics" name="early_diagnostics" multiple>
                         </div> -->
                         <div class="inc">
-                            <label for="ecg">ECG Information:</label>
-                            <input type="text" id="ecgInformation" name="ecgInformation" placeholder="60-90">
+                            <label for="ecgInformation" id="ecgInformation">Ecg :</label>
+                            <select name="ecgInformation" id="ecgInformation">
+                                <option value="">Select</option>
+                                <option value="Normal">Normal</option>
+                                <option value="Abnormal">Abnormal</option>
+                            </select>
                         </div>
                     </div>
                 </div>

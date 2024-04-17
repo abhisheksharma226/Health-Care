@@ -112,12 +112,7 @@ body {
 }
 
 header {
-  background-image: linear-gradient(
-      to right,
-      rgba(18, 172, 142, 0.9),
-      rgba(18, 172, 142, 0.7)
-    ),
-    url("assets/header.jpg");
+  background-image:  linear-gradient(to right, rgb(132 134 133 / 90%), rgb(35 182 153 / 70%)), url(assets/header.jpg);
   background-position: center center;
   background-size: cover;
   background-repeat: no-repeat;

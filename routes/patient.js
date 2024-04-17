@@ -4,6 +4,7 @@ const patientData = require("../models/patientData");
 const PatientAppointment = require("../models/patientAppointment");
 
 
+
 const router = Router();
 
 router.get("/login" , (req , res) => {
@@ -27,13 +28,17 @@ router.get("/patientHome", async (req, res) => {
     try {
        
         const loggedInPatientData = await patientData.findOne({});
-        if (!loggedInPatientData) {
+        const Patient = await patient.findOne({});
+        if (!Patient) {
             
             return res.render("login", { error: "No patient found" });
         }
 
 
-        return res.render("patientHome", { patientId : loggedInPatientData._id , patientName: loggedInPatientData.fullName , patientEmail : loggedInPatientData.email });
+        return res.render("patientHome", { 
+            patientId : loggedInPatientData._id , 
+            patientNAME: loggedInPatientData.fullName , 
+            patientEmail : loggedInPatientData.email });
     } catch (error) {
         console.error("Error fetching patient name:", error);
         return res.render("patientHome");
@@ -46,6 +51,8 @@ router.get("/patientProfile" , async (req , res) => {
     try {
        
         const loggedInPatientData = await patientData.findOne({});
+        const appointedPatient = await PatientAppointment.findOne({});
+        const loggedInPatient = await patient.findOne({});
         
         // if (!loggedInPatient) {
         //     console.error("No patient found");
@@ -53,12 +60,12 @@ router.get("/patientProfile" , async (req , res) => {
         // }
 
         return res.render("patientProfile", { 
-            patientName: loggedInPatientData.fullName , 
+            patientNAME: loggedInPatientData.fullName ,
             patientDOB : loggedInPatientData.dob , 
-            patientEmail : loggedInPatientData.email , 
-            patientNumber : loggedInPatientData.mobile ,
-            patientGender : loggedInPatientData.gender ,
-            patientOccupation : loggedInPatientData.occupation , 
+            patientEMAIL : loggedInPatientData.email , 
+            patientNUMBER : loggedInPatientData.mobile ,
+            patientGENDER : loggedInPatientData.gender ,
+            patientOCCUPATION : loggedInPatientData.occupation , 
             patientwd : loggedInPatientData.walkingData , 
             patienthr : loggedInPatientData.heartRate , 
             patientrr : loggedInPatientData.respiratoryRate , 
@@ -67,6 +74,13 @@ router.get("/patientProfile" , async (req , res) => {
             patientsq : loggedInPatientData.sleepQuality , 
             patienttmp : loggedInPatientData.temperature , 
             patientecg : loggedInPatientData.ecgInformation , 
+
+            patientname : loggedInPatient.name,
+            patientName: appointedPatient.name, 
+            patientNumber : appointedPatient.number , 
+            patientEmail : appointedPatient.email , 
+            patientDate : appointedPatient.date.toDateString() , 
+            patientTime : appointedPatient.time ,
             
         });
     } catch (error) {
@@ -80,8 +94,8 @@ router.get("/patientProfile" , async (req , res) => {
 
 router.get("/patientAppointments", async (req, res) => {
     try {
-        const loggedInPatient = await patient.findOne({});
-        if (!loggedInPatient) {
+        const loggedInPatientData = await patientData.findOne({});
+        if (!loggedInPatientData) {
             console.error("No patient found");
             return res.render("login", { error: "No patient found" });
         }
@@ -89,11 +103,11 @@ router.get("/patientAppointments", async (req, res) => {
         // Corrected property name
         const appointedPatient = await PatientAppointment.findOne({});
         
+        
 
-        
-        
         return res.render("patientAppointments", { 
-            patientname : loggedInPatient.name,
+          
+            patientname : loggedInPatientData.fullName,
             patientName: appointedPatient.name, 
             patientNumber : appointedPatient.number , 
             patientEmail : appointedPatient.email , 
@@ -245,9 +259,14 @@ router.post("/updatePatientData", async (req, res) => {
             { new: true } // Options: return the updated document
         );
 
+
+        
+
         if (!updatedPatient) {
             return res.status(404).json({ error: 'Patient not found' });
         }
+        
+
 
         return res.redirect("patientHome");
         

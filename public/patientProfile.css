@@ -108,3 +108,24 @@ html:not(.dark-style) .account-settings-links .list-group-item.active {
     padding     : 0.85rem 1.5rem;
     border-color: rgba(24, 28, 33, 0.03) !important;
 }
+
+
+/* EXTERNAL */
+.cardd {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 20px;
+    width: 800px;
+    margin: 0 auto;
+    text-align: left;
+    font-family: Arial, sans-serif;
+}
+
+.cardd-title {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.cardd-content {
+    margin-bottom: 10px;
+}
