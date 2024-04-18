@@ -5,6 +5,9 @@ const PatientAppointment = require("../models/patientAppointment");
 
 
 
+
+
+
 const router = Router();
 
 router.get("/login" , (req , res) => {
@@ -24,10 +27,13 @@ router.get("/patientCollection" , async (req , res) => {
 })
 
 
+
+
 router.get("/patientHome", async (req, res) => {
     try {
-       
+        
         const loggedInPatientData = await patientData.findOne({});
+        
         const Patient = await patient.findOne({});
         if (!Patient) {
             
@@ -38,6 +44,7 @@ router.get("/patientHome", async (req, res) => {
         return res.render("patientHome", { 
             patientId : loggedInPatientData._id , 
             patientNAME: loggedInPatientData.fullName , 
+            
             patientEmail : loggedInPatientData.email });
     } catch (error) {
         console.error("Error fetching patient name:", error);

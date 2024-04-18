@@ -14,10 +14,13 @@ data1.head()
 
 print(data1.dtypes)
 
+
+
 def preprocess_input(input_data):
+    
     # Splitting the 'Blood Pressure (mmHg)' column into 'Systolic_BP' and 'Diastolic_BP'
-    # input_data[['Systolic_BP', 'Diastolic_BP']] = input_data['bloodPressure'].str.split('/', expand=True)
-    # input_data.drop('bloodPressure', axis=1, inplace=True)
+    input_data[['Systolic_BP', 'Diastolic_BP']] = input_data['bloodPressure'].str.split('/', expand=True)
+    input_data.drop('bloodPressure', axis=1, inplace=True)
     
     # Fit and transform categorical data to numerical labels
     label_encoder_ecg = LabelEncoder()
@@ -51,6 +54,7 @@ y = data1['Disease']
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
 
 # Train a RandomForestClassifier
+# Algo model
 clf = RandomForestClassifier(n_estimators=100, random_state=42)
 clf.fit(X_train, y_train)
 
@@ -76,7 +80,7 @@ new_data = pd.DataFrame({
     'walkingData': [6000],
     'heartRate': [80],
     'respiratoryRate': [16],
-    'bloodPressure': [120/80],
+    'bloodPressure': ['120/80'],
     'calories': [320],
     'sleepQuality': [6.8],
     'temperature': [37.2],
