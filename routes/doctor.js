@@ -12,35 +12,27 @@ router.get("/drLogin" , (req , res) => {
 
 
 
-router.get("/drHome" ,async (req , res) => {
+router.get("/drHome", async (req, res) => {
     try {
-       
         const loggedIndoctor = await Doctor.findOne({});
         if (!loggedIndoctor) {
             return res.render("drLogin", { error: "No Doctor found" });
         }
-        // if (!loggedInPatient) {
-            //     console.error("No patient found");
-            //     return res.render("login", { error: "No patient found" });
-            // }
-            
-        const doctor = await Doctor.findOne({});
-        const loggedInDoctor = await doctorData.findOne({});
-        const patientappoint = await patientappointment.findOne({});
-       
+
+        // Fetch all patient appointments
+        const patientAppointments = await patientappointment.find({});
+
+        // Pass fetched appointments to the EJS template
         return res.render("drHome", { 
-            doctorNAME: doctor.drname , 
-            patientName : patientappoint.name ,
-            patientEmail : patientappoint.email ,
-            patientNumber : patientappoint.number ,
-            patientDate : patientappoint.date ,
-            patientTime : patientappoint.time ,
+            doctorName: loggedIndoctor.drname,
+            patientappointments: patientAppointments
         });
     } catch (error) {
-        console.error("Error fetching patient name:", error);
-        return res.render("drHome");
+        console.error("Error fetching patient appointments:", error);
+        return res.render("drHome", { error: "Error fetching patient appointments" });
     }
-})
+});
+
 
 
 
@@ -58,6 +50,7 @@ router.get("/drProfile" , async (req ,res) => {
     return res.render("drProfile" , {
         doctorName : loggedIndoctor.drname , 
         doctorEmail : loggedIndoctor.dremail ,
+        doctorNumber : updateData.mobile ,
        
        
     })

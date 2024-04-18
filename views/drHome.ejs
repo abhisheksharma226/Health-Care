@@ -14,7 +14,7 @@
   
   <header class="header">
 
-    <a href="#" class="logo"> <i class="fas fa-heartbeat"></i> <strong>Welcome Dr. <%= doctorNAME %></strong> </a>
+    <a href="#" class="logo"> <i class="fas fa-heartbeat"></i> <strong>Welcome Dr. <%= doctorName %></strong> </a>
 
 
     <!-- NAVBAR -->
@@ -38,16 +38,23 @@
 
 
 <!-- CARDS -->
-<div class="card">
-  
-  <h1><strong>Your Appointment</strong></h1>
-  <p class="card-content">Patient Name : <%= patientName %></p>
-  <p class="card-content">Pateint Email : <%= patientEmail %></p>
-  <p class="card-content">Patient Number : <%= patientNumber %></p>
-  <p class="card-content">Appointment Date : <%= patientDate %></p>
-  <p class="card-content">Appointment Time : <%= patientTime %></p>
- 
+<div class="appointment-container">
+  <% let a = 1; %>
+  <% patientappointments.forEach(appointment => { %>
+      <div class="card">
+          <h1><strong>Appointment <%= a %></strong></h1>
+          <p class="card-content">Patient Name : <%= appointment.name %></p>
+          <p class="card-content">Patient Email : <%= appointment.email %></p>
+          <p class="card-content">Patient Number : <%= appointment.number %></p>
+          <p class="card-content">Appointment Date : <%= appointment.date %></p>
+          <p class="card-content">Appointment Time : <%= appointment.time %></p>
+      </div>
+      <% a++ %>
+  <% }) %>
 </div>
+
+
+  
 
 
   

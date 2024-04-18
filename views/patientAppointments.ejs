@@ -38,17 +38,19 @@
 
 
 <!-- MAIN PART -->
-
-<div class="card">
+<div class="appointment-container">
+ 
+  <% patientappointments.forEach(appointment => { %>
+      <div class="card">
+          <h1><strong> Your Appointment </strong></h1>
+          <p class="card-content">Patient Name : <%= appointment.name %></p>
+          <p class="card-content">Patient Email : <%= appointment.email %></p>
+          <p class="card-content">Patient Number : <%= appointment.number %></p>
+          <p class="card-content">Appointment Date : <%= appointment.date %></p>
+          <p class="card-content">Appointment Time : <%= appointment.time %></p>
+      </div>
+  <% }) %>
   
-      <h1><strong>Appointment Receipt</strong></h1>
-      <p class="card-content">Patient Name : <%= patientName %></p>
-      <p class="card-content">Pateint Email : <%= patientEmail %></p>
-      <p class="card-content">Patient Number : <%= patientNumber %></p>
-      <p class="card-content">Doctor Name : Dr. Abhishek Sharma </p>
-      <p class="card-content">Appointment Date : <%= patientDate %></p>
-      <p class="card-content">Appointment Time : <%= patientTime %></p>
-     
 </div>
 
 

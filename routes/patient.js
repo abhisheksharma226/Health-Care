@@ -5,6 +5,7 @@ const PatientAppointment = require("../models/patientAppointment");
 
 
 
+const { spawn } = require('child_process');
 
 
 
@@ -20,9 +21,7 @@ router.get("/signup" , (req , res) => {
 
 router.get("/patientCollection" , async (req , res) => {
     const loggedInPatient = await patient.findOne({});
-        if (!loggedInPatient) {
-            return res.render("login", { error: "No patient found" });
-        }
+        
     return res.render("patientCollection");
 })
 
@@ -33,7 +32,7 @@ router.get("/patientHome", async (req, res) => {
     try {
         
         const loggedInPatientData = await patientData.findOne({});
-        
+
         const Patient = await patient.findOne({});
         if (!Patient) {
             
@@ -42,9 +41,9 @@ router.get("/patientHome", async (req, res) => {
 
 
         return res.render("patientHome", { 
+            patientName : Patient.name ,
             patientId : loggedInPatientData._id , 
             patientNAME: loggedInPatientData.fullName , 
-            
             patientEmail : loggedInPatientData.email });
     } catch (error) {
         console.error("Error fetching patient name:", error);
@@ -58,15 +57,17 @@ router.get("/patientProfile" , async (req , res) => {
     try {
        
         const loggedInPatientData = await patientData.findOne({});
-        const appointedPatient = await PatientAppointment.findOne({});
+        const patientAppointments = await PatientAppointment.find({});
         const loggedInPatient = await patient.findOne({});
-        
-        // if (!loggedInPatient) {
-        //     console.error("No patient found");
-        //     return res.render("login", { error: "No patient found" });
-        // }
+
+     
+        if (!loggedInPatient) {
+            console.error("No patient found");
+            return res.render("login", { error: "No patient found" });
+        }
 
         return res.render("patientProfile", { 
+            patientappointments: patientAppointments ,
             patientNAME: loggedInPatientData.fullName ,
             patientDOB : loggedInPatientData.dob , 
             patientEMAIL : loggedInPatientData.email , 
@@ -82,26 +83,21 @@ router.get("/patientProfile" , async (req , res) => {
             patienttmp : loggedInPatientData.temperature , 
             patientecg : loggedInPatientData.ecgInformation , 
 
-            patientname : loggedInPatient.name,
-            patientName: appointedPatient.name, 
-            patientNumber : appointedPatient.number , 
-            patientEmail : appointedPatient.email , 
-            patientDate : appointedPatient.date.toDateString() , 
-            patientTime : appointedPatient.time ,
+            
             
         });
     } catch (error) {
         console.error("Error fetching patient name:", error);
         return res.render("patientProfile");
     }
-
-    
 })
 
 
 router.get("/patientAppointments", async (req, res) => {
     try {
         const loggedInPatientData = await patientData.findOne({});
+        const patientAppointments = await PatientAppointment.find({});
+
         if (!loggedInPatientData) {
             console.error("No patient found");
             return res.render("login", { error: "No patient found" });
@@ -113,13 +109,9 @@ router.get("/patientAppointments", async (req, res) => {
         
 
         return res.render("patientAppointments", { 
-          
-            patientname : loggedInPatientData.fullName,
-            patientName: appointedPatient.name, 
-            patientNumber : appointedPatient.number , 
-            patientEmail : appointedPatient.email , 
-            patientDate : appointedPatient.date.toDateString() , 
-            patientTime : appointedPatient.time ,
+            patientName : loggedInPatientData.fullName ,
+            patientappointments: patientAppointments
+
         });
     } catch (error) {
         console.error("Error fetching patient name:", error);
