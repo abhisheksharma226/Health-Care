@@ -6,6 +6,7 @@ const PatientAppointment = require("../models/patientAppointment");
 
 
 const { spawn } = require('child_process');
+const patientAppointment = require("../models/patientAppointment");
 
 
 
@@ -225,7 +226,7 @@ router.post('/patientAppointments', async (req, res) => {
         return res.redirect("patientAppointments");
     } catch (error) {
         console.error('Error creating appointment:', error);
-        res.status(500).json({ error: 'An error occurred while creating the appointment' });
+        res.status(500).json({ error: `Doctor is not availabel at this ${ req.body.time } time` });
     }
 });
 

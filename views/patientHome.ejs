@@ -144,13 +144,16 @@
 
     </div>
 
+    
+    
+
     <!-- TOP DOCOTORS -->
     <section class="doctors" id="doctors">
 
       <h1 class="heading"> Top <span>doctors</span> </h1>
   
       <div class="box-container">
-
+        
         <div class="box">
           <img src="/doc6..jpg" alt="">
           <h3>Dr. Abhishek sharma</h3>
@@ -164,9 +167,9 @@
           </div>
       </div>
       <div class="box">
-          <img src="/doc4..jpg" alt="">
-          <h3>Dr.Rohit kumar</h3>
-          <span>Dermatologist</span>
+        <img src="/doc4..jpg" alt="">
+        <h3>Dr.Rohit kumar</h3>
+        <span>Dermatologist</span>
           <div class="share">
             <a href="https://www.facebook.com" target="_blank" class="fab fa-facebook-f"></a>
             <a href="https://www.x.com" target="_blank" class="fab fa-twitter"></a>
@@ -184,7 +187,7 @@
             <a href="https://www.instagram.com" target="_blank" class="fab fa-instagram"></a>
             <a href="https://www.linkedin.com" target="_blank" class="fab fa-linkedin"></a>
           </div>
-      </div>
+        </div>
   
           <div class="box">
               <img src="/doc3..jpg" alt="">
@@ -192,8 +195,8 @@
               <span>Medicine specialist</span>
               <div class="share">
               <a href="https://www.facebook.com" target="_blank" class="fab fa-facebook-f"></a>
-                  <a href="https://www.x.com" target="_blank" class="fab fa-twitter"></a>
-                  <a href="https://www.instagram.com" target="_blank" class="fab fa-instagram"></a>
+              <a href="https://www.x.com" target="_blank" class="fab fa-twitter"></a>
+              <a href="https://www.instagram.com" target="_blank" class="fab fa-instagram"></a>
                   <a href="https://www.linkedin.com" target="_blank" class="fab fa-linkedin"></a>
                   
               </div>
@@ -268,6 +271,17 @@
       </div>
   
   </section>
+
+
+
+  <!-- NEAR BY HOSPITALS -->
+  <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=places"></script>
+
+  <div id="map-canvas"></div>
+
+
+
+
 <!-- PRIVATE HOSPITALS -->
 <section class="services" id="pvtHospitals">
 
@@ -625,6 +639,9 @@
 
 </body>
 
+
+
+
 <script>
   // Get the current date
   var currentDate = new Date();
@@ -636,5 +653,71 @@
   document.getElementById("date").textContent = formattedDate;
 
 
+
+
+
 </script>
+
+
+
+
+
+    <!-- FOR MAP -->
+    <script>
+      (function () {
+
+        SearchPlaceMap = {
+            init: function () {
+                var self = this;
+                var location = new google.maps.LatLng(10.112293000000000000, 76.352684500000010000);
+    
+                self.map = new google.maps.Map(document.getElementById('map-canvas'), {
+                    mapTypeId: google.maps.MapTypeId.ROADMAP,
+                    center: location,
+                    zoom: 15
+                });
+    
+                /*verify location to search,
+                 *search radius
+                 *(alternately you can also search by setting bounds),
+                 *and type of places to search - in this case `hospital`
+                 */
+                var request = {
+                    location: location,
+                    radius: 500,
+                    types: ['hospital']
+                };
+    
+                self.infowindow = new google.maps.InfoWindow();
+                var service = new google.maps.places.PlacesService(self.map);
+                service.nearbySearch(request, function (results, status) {
+                    if (status == google.maps.places.PlacesServiceStatus.OK) {
+                        for (var i = 0; i < results.length; i++) {
+                            self.createMarker(results[i]);
+                        }
+                    }
+                });
+            },
+    
+            createMarker: function (place) {
+                var self = this;
+                var placeLoc = place.geometry.location;
+                var marker = new google.maps.Marker({
+                    map: self.map,
+                    position: place.geometry.location
+                });
+    
+                google.maps.event.addListener(marker, 'click', function () {
+                    self.infowindow.setContent(place.name);
+                    self.infowindow.open(self.map, this);
+                });
+            }
+        }
+    
+        SearchPlaceMap.init();
+    
+    })($);
+    </script>
+
+
 </html>

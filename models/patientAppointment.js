@@ -12,7 +12,6 @@ const patientAppointmentSchema = new mongoose.Schema({
     email: {
         type: String,
         required: true,
-      
     },
     date: {
         type: Date,
@@ -21,7 +20,8 @@ const patientAppointmentSchema = new mongoose.Schema({
     },
     time: {
         type: String,
-        required: true
+        required: true ,
+        unique : true ,
     },
 }, { timestamps: true });
 

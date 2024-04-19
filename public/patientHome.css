@@ -804,3 +804,13 @@
 .image img:hover {
     transform: scale(1.05);
 }
+
+
+
+
+/* MAP */
+#map-canvas {
+    height: 380px;
+    width: 540px;
+}
+  
