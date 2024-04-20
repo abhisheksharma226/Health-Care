@@ -8,7 +8,7 @@ from sklearn.preprocessing import LabelEncoder
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import classification_report
 
-data1 = pd.read_csv("C:\\Users\\91797\\OneDrive\\Desktop\\codeWithAbhi\\Health Care Website\\prediction\health_data.csv")
+data1 = pd.read_csv("C:\\Users\\91797\\OneDrive\\Desktop\\codeWithAbhi\\Health Care Website\\prediction\health_data_final.csv")
 
 data1.head()
 
