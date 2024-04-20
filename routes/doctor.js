@@ -36,8 +36,6 @@ router.get("/drHome", async (req, res) => {
 
 
 
-
-
 router.get("/drProfile" , async (req ,res) => {
 
     const loggedIndoctor = await Doctor.findOne({});

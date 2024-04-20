@@ -5,11 +5,6 @@ const PatientAppointment = require("../models/patientAppointment");
 
 
 
-const { spawn } = require('child_process');
-const patientAppointment = require("../models/patientAppointment");
-
-
-
 const router = Router();
 
 router.get("/login" , (req , res) => {
@@ -21,27 +16,51 @@ router.get("/signup" , (req , res) => {
 })
 
 router.get("/patientCollection" , async (req , res) => {
-    const loggedInPatient = await patient.findOne({});
+  
+
+    const Patient = await patient.findOne({});
+    if (!Patient) {
+        return res.render("login", { error: "No patient found" });
+    }
         
     return res.render("patientCollection");
 })
 
 
 
+//Predicted
+const handlePredictedDisease = async (req, res, next) => {
+    const predictedDisease =   req.predictedDisease; // Get predicted disease from request object
+    res.locals.predictedDisease =  predictedDisease; // Set predicted disease in locals object for access in templates
+    next(); // Call next middleware
+  };
+  
+  
+  
+  router.get("/patientHome", handlePredictedDisease,  async (req, res) => {
 
-router.get("/patientHome", async (req, res) => {
-    try {
+      
+      try {
+        const predictedDisease = await res.locals.predictedDisease;
+        console.log(predictedDisease);
         
         const loggedInPatientData = await patientData.findOne({});
 
-        const Patient = await patient.findOne({});
-        if (!Patient) {
-            
+        
+        
+        if (!loggedInPatientData) {
             return res.render("login", { error: "No patient found" });
         }
-
+        
+        const Patient = await patient.findOne({});
+        if (!Patient) {
+            return res.render("login", { error: "No patient found" });
+        }
+        
+        
 
         return res.render("patientHome", { 
+            Disease : predictedDisease ,
             patientName : Patient.name ,
             patientId : loggedInPatientData._id , 
             patientNAME: loggedInPatientData.fullName , 
@@ -83,9 +102,7 @@ router.get("/patientProfile" , async (req , res) => {
             patientsq : loggedInPatientData.sleepQuality , 
             patienttmp : loggedInPatientData.temperature , 
             patientecg : loggedInPatientData.ecgInformation , 
-
-            
-            
+   
         });
     } catch (error) {
         console.error("Error fetching patient name:", error);

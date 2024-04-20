@@ -12,9 +12,7 @@ data1 = pd.read_csv("C:\\Users\\91797\\OneDrive\\Desktop\\codeWithAbhi\\Health C
 
 data1.head()
 
-print(data1.dtypes)
-
-
+# print(data1.dtypes)
 
 def preprocess_input(input_data):
     
@@ -64,11 +62,11 @@ def predict_disease(input_data,clf):
     predictions = clf.predict(input_data)
     
     if predictions[0] == 1:
-        print('Predicted disease for new data: Healthy')
+        print('Healthy')
     elif predictions[0] == 2:
-        print('Predicted disease for new data: Hypertension')
+        print('Hypertension')
     else:
-        print('Predicted disease for new data: Cardiovascular Disease')
+        print('Cardiovascular Disease')
     
     # Return predictions
     return predictions
@@ -82,15 +80,15 @@ new_data = pd.DataFrame({
     'respiratoryRate': [16],
     'bloodPressure': ['120/80'],
     'calories': [320],
-    'sleepQuality': [6.8],
-    'temperature': [37.2],
+    'sleepQuality': [6],
+    'temperature': [37],
     'ecgInformation': [1]
 }, columns=X.columns)
 
 
-predictions = predict_disease(new_data, clf)
+# predictions = predict_disease(new_data, clf)
 # Print or return predictions (this will be captured by Node.js)
-print(predictions)
+# print(predictions)
 
 # # Evaluate the model
 # print("Classification Report:")
@@ -133,4 +131,4 @@ new_data_df = preprocess_input(new_data_df)
 
 # Make predictions
 predictions = predict_disease(new_data_df, clf)
-print(predictions)
+# print(predictions)

@@ -2,8 +2,38 @@ const express = require("express");
 const path = require("path");
 const mongoose = require("mongoose");
 const { checkForAuthenticationCookie } = require("./middlewares/authentication");
+// const session = require('express-session');
 
 const cookieParser = require("cookie-parser");
+
+
+//Python
+const { spawn } = require('child_process');
+
+// Define the command to run your Python script
+const pythonProcess = spawn('python', ['./prediction/disease_prediction_f.py']);
+
+// Listen for output data from the Python script
+let predictedDisease = '';
+
+pythonProcess.stdout.on('data', (data) => {
+  predictedDisease += data.toString();
+  console.log(predictedDisease);
+});
+
+// Listen for errors from the Python script
+pythonProcess.stderr.on('data', (data) => {
+//   console.error(`Python script error: ${data}`);
+});
+
+
+pythonProcess.on('close', (code) => {
+    if (code === 0) { // Check if the Python script exited successfully
+        // console.log('Predicted disease:', predictedDisease);
+        
+    }
+});
+
 
 
 const app = express();
@@ -30,6 +60,9 @@ app.set("views" , path.resolve("./views"));
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(checkForAuthenticationCookie("token"));
+
+
+
 
 
 app.get("/" , (req , res) => {

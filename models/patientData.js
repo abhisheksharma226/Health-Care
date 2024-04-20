@@ -34,7 +34,7 @@ const patientDataSchema = new mongoose.Schema({
     respiratoryRate: Number,
     bloodPressure: String,
     calories: Number,
-    sleepQuality: String,
+    sleepQuality: Number,
     temperature: Number,
     // earlyDiagnosticReports: String,
     ecgInformation: String,
