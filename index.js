@@ -10,6 +10,8 @@ const cookieParser = require("cookie-parser");
 //Python
 const { spawn } = require('child_process');
 
+
+const handlePredictedDisease = (req, res, next) => {
 // Define the command to run your Python script
 const pythonProcess = spawn('python', ['./prediction/disease_prediction_f.py']);
 
@@ -29,11 +31,15 @@ pythonProcess.stderr.on('data', (data) => {
 
 pythonProcess.on('close', (code) => {
     if (code === 0) { // Check if the Python script exited successfully
-        // console.log('Predicted disease:', predictedDisease);
-        
+        res.locals.predictedDisease = predictedDisease;
+        next();
+    } else {
+        console.error(`Python script exited with code ${code}`);
+        next(new Error("Failed to predict disease")); // Pass error to error handling middleware
     }
 });
 
+}
 
 
 const app = express();

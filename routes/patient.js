@@ -2,6 +2,7 @@ const { Router } = require("express");
 const patient = require("../models/patient");
 const patientData = require("../models/patientData");
 const PatientAppointment = require("../models/patientAppointment");
+const handlePredictedDisease = require("../middlewares/handlePredictedDisease");
 
 
 
@@ -28,20 +29,13 @@ router.get("/patientCollection" , async (req , res) => {
 
 
 
-//Predicted
-const handlePredictedDisease = async (req, res, next) => {
-    const predictedDisease =   req.predictedDisease; // Get predicted disease from request object
-    res.locals.predictedDisease =  predictedDisease; // Set predicted disease in locals object for access in templates
-    next(); // Call next middleware
-  };
-  
-  
+//Predicted  
   
   router.get("/patientHome", handlePredictedDisease,  async (req, res) => {
 
       
       try {
-        const predictedDisease = await res.locals.predictedDisease;
+        const predictedDisease =  res.locals.predictedDisease;
         console.log(predictedDisease);
         
         const loggedInPatientData = await patientData.findOne({});
