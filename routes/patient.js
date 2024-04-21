@@ -36,9 +36,11 @@ router.get("/patientCollection" , async (req , res) => {
       
       try {
         const predictedDisease =  res.locals.predictedDisease;
-        console.log(predictedDisease);
+        // console.log(predictedDisease);
+
+        const { email } = req.user; // Use the email of the logged-in user
         
-        const loggedInPatientData = await patientData.findOne({});
+        const loggedInPatientData = await patientData.findOne({email});
 
         
         
@@ -69,8 +71,11 @@ router.get("/patientCollection" , async (req , res) => {
 router.get("/patientProfile" , async (req , res) => {
     
     try {
-       
-        const loggedInPatientData = await patientData.findOne({});
+        const { email } = req.user; // Use the email of the logged-in user
+
+        
+
+        const loggedInPatientData = await patientData.findOne({ email });
         const patientAppointments = await PatientAppointment.find({});
         const loggedInPatient = await patient.findOne({});
 
@@ -107,8 +112,10 @@ router.get("/patientProfile" , async (req , res) => {
 
 router.get("/patientAppointments", async (req, res) => {
     try {
-        const loggedInPatientData = await patientData.findOne({});
-        const patientAppointments = await PatientAppointment.find({});
+        const {email } = req.user;
+
+        const loggedInPatientData = await patientData.findOne({ email });
+        const patientAppointments = await PatientAppointment.find({ email });
 
         if (!loggedInPatientData) {
             console.error("No patient found");

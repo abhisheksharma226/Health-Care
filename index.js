@@ -20,7 +20,7 @@ let predictedDisease = '';
 
 pythonProcess.stdout.on('data', (data) => {
   predictedDisease += data.toString();
-  console.log(predictedDisease);
+//   console.log(predictedDisease);
 });
 
 // Listen for errors from the Python script
