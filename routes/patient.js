@@ -112,10 +112,10 @@ router.get("/patientProfile" , async (req , res) => {
 
 router.get("/patientAppointments", async (req, res) => {
     try {
-        const {email } = req.user;
+        const { email } = req.user;
 
         const loggedInPatientData = await patientData.findOne({ email });
-        const patientAppointments = await PatientAppointment.find({ email });
+        const patientAppointments = await PatientAppointment.find({  });
 
         if (!loggedInPatientData) {
             console.error("No patient found");
@@ -216,7 +216,7 @@ router.post("/patientCollection", async (req, res) => {
         await newPatient.validate();
         await newPatient.save();
 
-        return res.redirect("patientHome");
+        return res.redirect("login");
     } catch (error) {
         console.error("Error creating patient:", error);
         return res.status(500).json({ error: "Error creating patient. Please try again." });
